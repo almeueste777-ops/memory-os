@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#311042" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="48" fill="url(#bg)" />
+  <rect x="10" y="10" width="172" height="172" rx="40" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+  <g>
+    <path d="M60 96 L96 60 L132 96 L96 132 Z" fill="none" stroke="url(#glow)" stroke-width="3" stroke-dasharray="3 3" opacity="0.6"/>
+    <circle cx="96" cy="60" r="12" fill="url(#glow)" />
+    <circle cx="132" cy="96" r="12" fill="url(#glow)" />
+    <circle cx="96" cy="132" r="12" fill="url(#glow)" />
+    <circle cx="60" cy="96" r="12" fill="url(#glow)" />
+    <circle cx="96" cy="96" r="16" fill="#ffffff" />
+    <circle cx="96" cy="96" r="12" fill="url(#glow)" opacity="0.9" />
+  </g>
+</svg>
