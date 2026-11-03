@@ -74,13 +74,23 @@ export const TopBar: React.FC<TopBarProps> = ({
 
           {isMenuOpen && (
             <div
-              className="absolute left-0 mt-1 w-60 rounded-xl glass-window py-1.5 shadow-2xl z-50 text-slate-200 animate-scale-up"
+              className="absolute left-0 mt-1 w-64 rounded-xl glass-window py-1.5 shadow-2xl z-50 text-slate-200 animate-scale-up"
               onMouseLeave={() => setIsMenuOpen(false)}
             >
               <div className="px-3 py-1.5 border-b border-white/10 mb-1">
                 <p className="font-semibold text-white text-[13px]">Memory OS 2.0</p>
                 <p className="text-[10px] text-slate-400">PWA Glassmorphism Edition</p>
               </div>
+              <button
+                onClick={() => {
+                  onOpenApp('loci-world');
+                  setIsMenuOpen(false);
+                }}
+                className="w-full text-left px-3 py-1.5 hover:bg-rose-600/30 flex items-center justify-between text-rose-300 font-medium"
+              >
+                <span>Palat Virtual 3D (Loci)</span>
+                <span className="text-[10px] text-slate-400">P</span>
+              </button>
               <button
                 onClick={() => {
                   onOpenApp('academy');

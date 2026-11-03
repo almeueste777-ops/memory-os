@@ -10,23 +10,33 @@ import { OSWindow } from './components/OSWindow';
 import { Spotlight } from './components/Spotlight';
 
 // Apps
+import { LociWorldApp } from './apps/LociWorldApp';
+import { AcademyApp } from './apps/AcademyApp';
 import { JournalApp } from './apps/JournalApp';
 import { GraphApp } from './apps/GraphApp';
 import { VaultApp } from './apps/VaultApp';
 import { RecallApp } from './apps/RecallApp';
-import { AcademyApp } from './apps/AcademyApp';
 import { SettingsApp } from './apps/SettingsApp';
 import { MemoryViewerApp } from './apps/MemoryViewerApp';
 
 const DEFAULT_WINDOWS: Record<AppId, Omit<WindowState, 'id' | 'zIndex' | 'isOpen' | 'isMinimized' | 'isMaximized'>> = {
+  'loci-world': {
+    appId: 'loci-world',
+    title: 'Palatul Virtual Loci — Lume 3D Interactivă',
+    iconName: 'loci-world',
+    x: 65,
+    y: 45,
+    width: 920,
+    height: 630,
+  },
   academy: {
     appId: 'academy',
     title: 'Manual de Mnemotehnică & Academie',
     iconName: 'academy',
-    x: 90,
-    y: 50,
+    x: 100,
+    y: 60,
     width: 860,
-    height: 600,
+    height: 590,
   },
   journal: {
     appId: 'journal',
@@ -86,7 +96,7 @@ const DEFAULT_WINDOWS: Record<AppId, Omit<WindowState, 'id' | 'zIndex' | 'isOpen
 
 export function App() {
   const [windows, setWindows] = useState<WindowState[]>([]);
-  const [activeWindowId, setActiveWindowId] = useState<string>('academy');
+  const [activeWindowId, setActiveWindowId] = useState<string>('loci-world');
   const [wallpaper, setWallpaper] = useState<string>('aurora');
   const [isSpotlightOpen, setIsSpotlightOpen] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
@@ -107,11 +117,11 @@ export function App() {
     };
     window.addEventListener('beforeinstallprompt', handleBeforeInstall);
 
-    // Initial default windows: Academy open by default!
+    // Initial default window: Loci World 3D open by default!
     setWindows([
       {
-        id: 'academy',
-        ...DEFAULT_WINDOWS.academy,
+        id: 'loci-world',
+        ...DEFAULT_WINDOWS['loci-world'],
         isOpen: true,
         isMinimized: false,
         isMaximized: false,
@@ -302,6 +312,10 @@ export function App() {
           onUpdatePosition={handleUpdatePosition}
           onUpdateSize={handleUpdateSize}
         >
+          {win.appId === 'loci-world' && (
+            <LociWorldApp onOpenViewer={handleOpenMemoryViewer} />
+          )}
+
           {win.appId === 'academy' && (
             <AcademyApp />
           )}

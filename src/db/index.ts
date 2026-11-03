@@ -31,9 +31,23 @@ export interface OSSettings {
   dockPosition: 'bottom' | 'left' | 'top';
 }
 
+export interface LocusStation {
+  id: string;
+  order: number;
+  name: string;
+  room: string;
+  position: [number, number, number];
+  color: string;
+  memoryId?: number;
+  customTitle?: string;
+  mnemonicScene?: string;
+  updatedAt?: string;
+}
+
 export class MemoryOSDatabase extends Dexie {
   memories!: Table<Memory, number>;
   settings!: Table<OSSettings, string>;
+  loci!: Table<LocusStation, string>;
 
   constructor() {
     super('MemoryOS_DB');
@@ -41,10 +55,98 @@ export class MemoryOSDatabase extends Dexie {
       memories: '++id, title, category, *tags, date, pinned, favorite, importance, emotion, createdAt',
       settings: 'id'
     });
+    this.version(2).stores({
+      memories: '++id, title, category, *tags, date, pinned, favorite, importance, emotion, createdAt',
+      settings: 'id',
+      loci: 'id, order, memoryId, room'
+    });
   }
 }
 
 export const db = new MemoryOSDatabase();
+
+export const INITIAL_LOCI_STATIONS: LocusStation[] = [
+  {
+    id: 'locus-1',
+    order: 1,
+    name: 'Poarta de Obsidian',
+    room: 'Atriumul de Intrare',
+    position: [0, 1.2, 8],
+    color: '#818cf8',
+    customTitle: 'Geneza Memory OS',
+    mnemonicScene: 'O cheie uriașă de ametist care plutește și descuie o poartă din sticlă neagră prin care luminează circuite neuronale.',
+  },
+  {
+    id: 'locus-2',
+    order: 2,
+    name: 'Fântâna Sinapselor',
+    room: 'Piațeta Luminii',
+    position: [-6, 1.2, 4],
+    color: '#38bdf8',
+    customTitle: 'Relația Dintre Gânduri și Neuron',
+    mnemonicScene: 'Apa fântânii este compusă din raze de lumină fosforescentă ce formează o rețea de sinapse vii.',
+  },
+  {
+    id: 'locus-3',
+    order: 3,
+    name: 'Masa Alchimistului',
+    room: 'Laboratorul Ideilor',
+    position: [-7, 1.2, -3],
+    color: '#fbbf24',
+    customTitle: 'Proiecte & Revelații',
+    mnemonicScene: 'O călimară fermecată din care cerneala de aur se ridică în aer și se așază singură în formule de cod.',
+  },
+  {
+    id: 'locus-4',
+    order: 4,
+    name: 'Globul Telescopic',
+    room: 'Observatorul Astral',
+    position: [-3, 1.5, -8],
+    color: '#c084fc',
+    customTitle: 'Perspectiva Macro & Viziune',
+    mnemonicScene: 'O sferă rotativă uriașă în care se văd constelațiile gândurilor arhivate în timp.',
+  },
+  {
+    id: 'locus-5',
+    order: 5,
+    name: 'Altarul Cristalului',
+    room: 'Sanctuarul Revelațiilor',
+    position: [3, 1.5, -8],
+    color: '#f472b6',
+    customTitle: 'Citat Seneca: Valoarea Timpului',
+    mnemonicScene: 'O clepsidră masivă de diamant în care nisipul urcă în loc să coboare, sfidând trecerea timpului.',
+  },
+  {
+    id: 'locus-6',
+    order: 6,
+    name: 'Bonsaiul Milenar',
+    room: 'Grădina Zen',
+    position: [7, 1.2, -3],
+    color: '#34d399',
+    customTitle: 'Lecția de Calm & Echilibru',
+    mnemonicScene: 'Frunzele bonsaiului sunt mici bucăți de jad verde care șoptesc cuvinte de liniște când bate vântul.',
+  },
+  {
+    id: 'locus-7',
+    order: 7,
+    name: 'Oglinda Reflecției',
+    room: 'Galeria Memoriei',
+    position: [6, 1.2, 4],
+    color: '#f87171',
+    customTitle: 'Cine eram acum un an?',
+    mnemonicScene: 'Oglinda nu îți reflectă corpul, ci un film panoramic al momentelor tale decisive din trecut.',
+  },
+  {
+    id: 'locus-8',
+    order: 8,
+    name: 'Monolitul Zenit',
+    room: 'Turnul Înțelepciunii',
+    position: [0, 2.0, 0],
+    color: '#a78bfa',
+    customTitle: 'Sinteza Învățării (Second Brain)',
+    mnemonicScene: 'Un monolit plutitor de cuarț violet care emite un puls de claritate ce leagă toate celelalte 7 stații.',
+  },
+];
 
 // Seed initial memory system if completely empty
 export async function seedInitialMemoriesIfEmpty() {
@@ -133,5 +235,10 @@ export async function seedInitialMemoriesIfEmpty() {
       soundEnabled: true,
       dockPosition: 'bottom'
     });
+  }
+
+  const lociCount = await db.loci.count();
+  if (lociCount === 0) {
+    await db.loci.bulkAdd(INITIAL_LOCI_STATIONS);
   }
 }

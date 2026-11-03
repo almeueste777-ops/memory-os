@@ -25,7 +25,11 @@ import {
   Layers,
   ArrowRight,
   Edit3,
-  GraduationCap
+  GraduationCap,
+  Landmark,
+  Compass,
+  Play,
+  MapPin
 } from 'lucide-react';
 
 interface OSIconProps {
@@ -36,6 +40,15 @@ interface OSIconProps {
 
 export const OSIcon: React.FC<OSIconProps> = ({ name, className = 'w-5 h-5', size = 20 }) => {
   switch (name) {
+    case 'loci-world':
+    case 'landmark':
+      return <Landmark size={size} className={className} />;
+    case 'map-pin':
+      return <MapPin size={size} className={className} />;
+    case 'compass':
+      return <Compass size={size} className={className} />;
+    case 'play':
+      return <Play size={size} className={className} />;
     case 'academy':
     case 'graduation-cap':
       return <GraduationCap size={size} className={className} />;

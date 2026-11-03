@@ -11,6 +11,12 @@ interface DockItem {
 
 const DOCK_ITEMS: DockItem[] = [
   {
+    id: 'loci-world',
+    title: 'Palat Virtual 3D (Loci)',
+    icon: 'loci-world',
+    gradient: 'from-rose-500 to-indigo-600',
+  },
+  {
     id: 'academy',
     title: 'Manual & Academie',
     icon: 'academy',
@@ -61,7 +67,7 @@ export const Dock: React.FC<DockProps> = ({
 }) => {
   return (
     <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-40">
-      <div className="px-3.5 py-2.5 rounded-2xl glass-panel shadow-glass flex items-center space-x-3.5 border border-white/20 transition-all duration-300 hover:border-white/30">
+      <div className="px-3.5 py-2.5 rounded-2xl glass-panel shadow-glass flex items-center space-x-3 border border-white/20 transition-all duration-300 hover:border-white/30">
         {DOCK_ITEMS.map((item) => {
           const isOpen = openAppIds.includes(item.id);
           const isActive = activeAppId === item.id;
@@ -76,12 +82,12 @@ export const Dock: React.FC<DockProps> = ({
               {/* Icon Button */}
               <button
                 onClick={() => onAppClick(item.id)}
-                className={`w-12 h-12 rounded-xl bg-gradient-to-tr ${item.gradient} p-0.5 shadow-lg transform transition-all duration-200 group-hover:-translate-y-2 group-hover:scale-110 active:scale-95 flex items-center justify-center relative overflow-hidden`}
+                className={`w-11 h-11 rounded-xl bg-gradient-to-tr ${item.gradient} p-0.5 shadow-lg transform transition-all duration-200 group-hover:-translate-y-2 group-hover:scale-110 active:scale-95 flex items-center justify-center relative overflow-hidden`}
               >
                 {/* Glass reflection top glaze */}
                 <div className="absolute inset-x-0 top-0 h-1/2 bg-white/25 rounded-t-[10px] pointer-events-none" />
                 <div className="w-full h-full rounded-[10px] flex items-center justify-center text-white bg-black/10">
-                  <OSIcon name={item.icon} size={24} className="drop-shadow" />
+                  <OSIcon name={item.icon} size={22} className="drop-shadow" />
                 </div>
               </button>
 

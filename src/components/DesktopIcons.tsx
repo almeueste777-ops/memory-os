@@ -8,6 +8,7 @@ interface DesktopIconsProps {
 
 export const DesktopIcons: React.FC<DesktopIconsProps> = ({ onOpenApp }) => {
   const desktopApps: { id: AppId; name: string; icon: string; color: string }[] = [
+    { id: 'loci-world', name: 'Palat Virtual 3D', icon: 'loci-world', color: 'bg-rose-500/20 text-rose-400 border-rose-500/30' },
     { id: 'academy', name: 'Manual Mnemotehnică', icon: 'academy', color: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' },
     { id: 'journal', name: 'Jurnal & Captură', icon: 'journal', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30' },
     { id: 'graph', name: 'Graf Sinapse', icon: 'graph', color: 'bg-purple-500/20 text-purple-400 border-purple-500/30' },
@@ -27,10 +28,10 @@ export const DesktopIcons: React.FC<DesktopIconsProps> = ({ onOpenApp }) => {
               onOpenApp(app.id);
             }
           }}
-          className="group flex flex-col items-center w-24 p-1.5 rounded-xl hover:bg-white/[0.08] focus:bg-white/[0.12] transition-colors cursor-pointer text-center"
+          className="group flex flex-col items-center w-24 p-1 rounded-xl hover:bg-white/[0.08] focus:bg-white/[0.12] transition-colors cursor-pointer text-center"
         >
           <div className={`w-13 h-13 rounded-2xl flex items-center justify-center border backdrop-blur-md shadow-md group-hover:scale-105 group-active:scale-95 transition-transform ${app.color}`}>
-            <OSIcon name={app.icon} size={26} />
+            <OSIcon name={app.icon} size={25} />
           </div>
           <span className="mt-1 text-xs font-medium text-slate-200 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] group-hover:text-white line-clamp-1">
             {app.name}

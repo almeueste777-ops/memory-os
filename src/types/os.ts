@@ -4,6 +4,7 @@ export type AppId =
   | 'graph' 
   | 'recall' 
   | 'academy'
+  | 'loci-world'
   | 'settings' 
   | 'memory-viewer';
 
