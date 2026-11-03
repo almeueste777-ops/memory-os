@@ -24,7 +24,8 @@ import {
   Folder,
   Layers,
   ArrowRight,
-  Edit3
+  Edit3,
+  GraduationCap
 } from 'lucide-react';
 
 interface OSIconProps {
@@ -35,6 +36,9 @@ interface OSIconProps {
 
 export const OSIcon: React.FC<OSIconProps> = ({ name, className = 'w-5 h-5', size = 20 }) => {
   switch (name) {
+    case 'academy':
+    case 'graduation-cap':
+      return <GraduationCap size={size} className={className} />;
     case 'journal':
     case 'book-open':
       return <BookOpen size={size} className={className} />;

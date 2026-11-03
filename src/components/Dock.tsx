@@ -11,6 +11,12 @@ interface DockItem {
 
 const DOCK_ITEMS: DockItem[] = [
   {
+    id: 'academy',
+    title: 'Manual & Academie',
+    icon: 'academy',
+    gradient: 'from-emerald-600 to-teal-700',
+  },
+  {
     id: 'journal',
     title: 'Memory Journal',
     icon: 'journal',
@@ -32,7 +38,7 @@ const DOCK_ITEMS: DockItem[] = [
     id: 'recall',
     title: 'Recall Engine',
     icon: 'recall',
-    gradient: 'from-emerald-500 to-teal-600',
+    gradient: 'from-cyan-500 to-blue-600',
   },
   {
     id: 'settings',

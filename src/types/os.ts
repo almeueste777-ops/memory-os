@@ -3,6 +3,7 @@ export type AppId =
   | 'vault' 
   | 'graph' 
   | 'recall' 
+  | 'academy'
   | 'settings' 
   | 'memory-viewer';
 

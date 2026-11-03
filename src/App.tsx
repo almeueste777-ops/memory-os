@@ -14,16 +14,26 @@ import { JournalApp } from './apps/JournalApp';
 import { GraphApp } from './apps/GraphApp';
 import { VaultApp } from './apps/VaultApp';
 import { RecallApp } from './apps/RecallApp';
+import { AcademyApp } from './apps/AcademyApp';
 import { SettingsApp } from './apps/SettingsApp';
 import { MemoryViewerApp } from './apps/MemoryViewerApp';
 
 const DEFAULT_WINDOWS: Record<AppId, Omit<WindowState, 'id' | 'zIndex' | 'isOpen' | 'isMinimized' | 'isMaximized'>> = {
+  academy: {
+    appId: 'academy',
+    title: 'Manual de Mnemotehnică & Academie',
+    iconName: 'academy',
+    x: 90,
+    y: 50,
+    width: 860,
+    height: 600,
+  },
   journal: {
     appId: 'journal',
     title: 'Memory Journal & Stream',
     iconName: 'journal',
-    x: 80,
-    y: 60,
+    x: 120,
+    y: 70,
     width: 780,
     height: 580,
   },
@@ -76,7 +86,7 @@ const DEFAULT_WINDOWS: Record<AppId, Omit<WindowState, 'id' | 'zIndex' | 'isOpen
 
 export function App() {
   const [windows, setWindows] = useState<WindowState[]>([]);
-  const [activeWindowId, setActiveWindowId] = useState<string>('journal');
+  const [activeWindowId, setActiveWindowId] = useState<string>('academy');
   const [wallpaper, setWallpaper] = useState<string>('aurora');
   const [isSpotlightOpen, setIsSpotlightOpen] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
@@ -97,11 +107,11 @@ export function App() {
     };
     window.addEventListener('beforeinstallprompt', handleBeforeInstall);
 
-    // Initial default window: Journal
+    // Initial default windows: Academy open by default!
     setWindows([
       {
-        id: 'journal',
-        ...DEFAULT_WINDOWS.journal,
+        id: 'academy',
+        ...DEFAULT_WINDOWS.academy,
         isOpen: true,
         isMinimized: false,
         isMaximized: false,
@@ -163,7 +173,6 @@ export function App() {
       const newZ = topZ + 1;
       setTopZ(newZ);
 
-      // Stagger slightly if multiple windows open
       const offset = (windows.length % 5) * 24;
 
       const newWin: WindowState = {
@@ -293,6 +302,10 @@ export function App() {
           onUpdatePosition={handleUpdatePosition}
           onUpdateSize={handleUpdateSize}
         >
+          {win.appId === 'academy' && (
+            <AcademyApp />
+          )}
+
           {win.appId === 'journal' && (
             <JournalApp
               allMemories={memories}

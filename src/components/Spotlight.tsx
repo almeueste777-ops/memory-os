@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { Memory } from '../db';
 import type { AppId } from '../types/os';
-import { Search, Brain, BookOpen, Share2, Database, Sparkles, Settings, ArrowRight, X } from 'lucide-react';
+import { Search, Brain, BookOpen, Share2, Database, Sparkles, Settings, ArrowRight, X, GraduationCap } from 'lucide-react';
 
 interface SpotlightProps {
   isOpen: boolean;
@@ -40,6 +40,7 @@ export const Spotlight: React.FC<SpotlightProps> = ({
     : [];
 
   const appActions: { id: AppId; title: string; subtitle: string; icon: any }[] = [
+    { id: 'academy', title: 'Manual Mnemotehnică', subtitle: 'Ghid tehnici (texte, numere, nume, locuri, etape)', icon: GraduationCap },
     { id: 'journal', title: 'Memory Journal', subtitle: 'Scrie un gând sau o notiță nouă', icon: BookOpen },
     { id: 'graph', title: 'Synapse Graph', subtitle: 'Explorează harta sinaptică a memoriei', icon: Share2 },
     { id: 'vault', title: 'Memory Vault', subtitle: 'Caută și filtrează toate amintirile', icon: Database },
@@ -112,7 +113,7 @@ export const Spotlight: React.FC<SpotlightProps> = ({
               setQuery(e.target.value);
               setSelectedIndex(0);
             }}
-            placeholder="Ce vrei să găsești sau să faci în Memory OS? (ex: neuroștiință, jurnal, Seneca...)"
+            placeholder="Ce vrei să găsești sau să faci în Memory OS? (ex: manual, numere, Seneca...)"
             className="w-full bg-transparent text-slate-100 placeholder-slate-400 text-sm focus:outline-none"
           />
           {query && (
